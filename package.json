@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^18.15.11"
+    "@figma/plugin-typings": "^1.62.0",
+    "@types/node": "^18.15.11",
+    "vite": "^4.2.1"
   }
 }
