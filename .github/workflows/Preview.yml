@@ -11,9 +11,22 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: echo 环境准备完成~
 
-      - run: echo '${{ toJSON(github) }}'
-      - run: echo hello word
+      - name: Install
+        run: pnpm i
 
-    
+      - name: Generate
+        run: pnpm generate
+
+      - name: Publish
+        run: pnpm -r publish --report-summary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - run: echo 运行完成~    
+      
+
+
 
