@@ -35,7 +35,7 @@ jobs:
         run: pnpm generate
 
       - name: Publish
-        run: pnpm -r publish --report-summary --no-git-checks
+        run: pnpm -r publish --access public --report-summary --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
