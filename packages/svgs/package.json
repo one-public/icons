@@ -1,0 +1,11 @@
+{
+	"name": "@iconify-icons/ha",
+	"description": "Iconify icon components for ha",
+	"version": "1.0.0",
+	"type": "module",
+	"bugs": "https://github.com/iconify/iconify/issues",
+	"homepage": "https://github.com/iconify/iconify",
+	"dependencies": {
+		"@iconify/types": "*"
+	}
+}

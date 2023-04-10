@@ -1,0 +1,24 @@
+{
+	"name": "@hatech/icon-json",
+	"description": "同创图标json文件",
+	"version": "0.0.11",
+	"main": "index.js",
+	"module": "index.mjs",
+	"types": "index.d.ts",
+	"exports": {
+		"./*": "./*",
+		".": {
+			"require": "./index.js",
+			"import": "./index.mjs"
+		},
+		"./icons.json": "./icons.json",
+		"./metadata.json": "./metadata.json"
+	},
+	"iconSet": {
+		"icons": "icons.json",
+		"metadata": "metadata.json"
+	},
+	"dependencies": {
+		"@iconify/types": "*"
+	}
+}

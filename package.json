@@ -1,0 +1,15 @@
+{
+  "name": "hatech-icons",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "generate": "cd packages/tools && pnpm run generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11"
+  }
+}
