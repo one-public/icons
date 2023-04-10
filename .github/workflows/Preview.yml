@@ -8,11 +8,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+
+      - name: Install node
+        uses: actions/setup-node@v3
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: echo 环境准备完成~
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        
+      - run: >
+          echo 环境准备完成~ "$(pnpm -v)"
+          echo pnpm: "$(pnpm -v)"
+          echo node: "$(node -v)"
+          echo npm:  "$(npm -v)"
 
       - name: Install
         run: pnpm i
