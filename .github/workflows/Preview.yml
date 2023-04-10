@@ -17,6 +17,9 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: false
         
       - run: >
           echo 环境准备完成~ "$(pnpm -v)"
@@ -26,6 +29,7 @@ jobs:
 
       - name: Install
         run: pnpm i
+
 
       - name: Generate
         run: pnpm generate
