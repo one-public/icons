@@ -1,10 +1,8 @@
 {
-	"name": "@iconify-icons/ha",
-	"description": "Iconify icon components for ha",
-	"version": "1.0.0",
-	"type": "module",
-	"bugs": "https://github.com/iconify/iconify/issues",
-	"homepage": "https://github.com/iconify/iconify",
+	"name": "@hatech/icons-svg",
+	"description": "同创svg图标项目",
+	"version": "0.0.1",
+	"private": true,
 	"dependencies": {
 		"@iconify/types": "*"
 	}
