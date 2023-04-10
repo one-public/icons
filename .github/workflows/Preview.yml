@@ -12,7 +12,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: latest
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
@@ -26,8 +26,6 @@ jobs:
           pnpm: "$(pnpm -v)"\n\t
           node: "$(node -v)"\n\t
           npm:  "$(npm -v)"\n\t
-
-      - run: npm doctor
 
       - name: Install
         run: pnpm i
