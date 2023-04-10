@@ -22,10 +22,10 @@ jobs:
           run_install: false
         
       - run: >
-          echo 环境准备完成~ "$(pnpm -v)"
-          echo pnpm: "$(pnpm -v)"
-          echo node: "$(node -v)"
-          echo npm:  "$(npm -v)"
+          echo 环境准备完成~\n\t
+          pnpm: "$(pnpm -v)"\n\t
+          node: "$(node -v)"\n\t
+          npm:  "$(npm -v)"\n\t
 
       - name: Install
         run: pnpm i
@@ -35,7 +35,7 @@ jobs:
         run: pnpm generate
 
       - name: Publish
-        run: pnpm -r publish --report-summary
+        run: pnpm -r publish --report-summary --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
