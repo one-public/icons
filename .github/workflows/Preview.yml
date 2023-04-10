@@ -27,9 +27,10 @@ jobs:
           node: "$(node -v)"\n\t
           npm:  "$(npm -v)"\n\t
 
+      - run: npm doctor
+
       - name: Install
         run: pnpm i
-
 
       - name: Generate
         run: pnpm generate
