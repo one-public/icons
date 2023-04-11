@@ -1,4 +1,4 @@
-import { IconSet, bumpVersion, exportJSONPackage, getNPMVersion, execAsync } from "@iconify/tools";
+import { IconSet, bumpVersion, exportJSONPackage, getNPMVersion } from "@iconify/tools";
 import { readFileSync } from "node:fs";
 import { iconJsonPath } from "./config";
 
@@ -49,13 +49,14 @@ export default async function (iconSet: IconSet) {
     }
   });
 
-  console.log(`${name} 准备推送到npm仓库`);
+  console.log(`${name} 生成完成, 当前版本是: ${version}`);
 
-  await execAsync('npm publish --access=public --silent --dry-run', {
-    cwd: target,
-  });
+  // console.log(`${name} 准备推送到npm仓库`);
 
-  console.log(`${name} 推送成功, 新版本是: ${version}`);
+  // await execAsync('npm publish --access=public --silent --dry-run', {
+  //   cwd: target,
+  // });
 
+  // console.log(`${name} 推送成功, 新版本是: ${version}`);
 }
 
