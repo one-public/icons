@@ -1,0 +1,58 @@
+:root{
+  --theme-color: #3f79d6;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  padding: 5px 8px;
+  top: 135%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+@media (hover: hover) {
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.icons-item:hover,
+.icons-item.active {
+  color: var(--theme-color);
+  position: relative;
+}
+.icons-item.active::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 4px;
+  background: var(--theme-color);
+  opacity: 0.1;
+}
+.icons-item:hover::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 4px;
+  border: 1px solid var(--theme-color);
+  opacity: 0.4;
+}
