@@ -1,1 +1,1 @@
-## @hatech/icon-tools
+## @one-public/icon-tools

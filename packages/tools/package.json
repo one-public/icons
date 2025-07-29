@@ -1,7 +1,7 @@
 {
-  "name": "@hatech/icon-tools",
+  "name": "@one-public/icon-tools",
   "version": "1.0.0",
-  "description": "",
+  "description": "用来获取设计工具中的图标,生成svg,并且发布到npm",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -11,11 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@iconify/tools": "^2.2.6"
+    "@iconify/tools": "catalog:"
   },
   "devDependencies": {
-    "@iconify/types": "^2.0.0",
-    "esno": "^0.16.3",
-    "typescript": "^5.0.3"
-  }
+    "@iconify/types": "catalog:",
+    "esno": "catalog:",
+    "typescript": "catalog:"
+  },
+	"volta": {
+		"extends": "../../package.json"
+	}
 }

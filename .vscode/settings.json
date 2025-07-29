@@ -1,5 +1,13 @@
 {
   "cSpell.words": [
-    "unocss"
-  ]
+    "esno",
+    "iconify",
+    "singlefile",
+    "Svgs",
+    "sxzz",
+    "unocss",
+    "unplugin",
+    "vite"
+  ],
+  "eslint.useFlatConfig": true
 }

@@ -1,7 +1,7 @@
 import type { Component } from "solid-js";
 import { createMemo, For } from "solid-js";
 import { addCollection } from "@iconify-icon/solid";
-import { icons } from "@duowb/icon-json";
+import { icons } from "@one-public/icon-json";
 import Icons from "./Icons";
 import { searchValue } from "../currentValue";
 

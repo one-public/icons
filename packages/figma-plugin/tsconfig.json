@@ -11,6 +11,7 @@
     "types": ["vite/client", "@figma/plugin-typings/index"],
     "noEmit": true,
     "isolatedModules": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "*.ts"]
 }

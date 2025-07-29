@@ -1,7 +1,7 @@
 {
-	"name": "@duowb/icon-json",
+	"name": "@one-public/icon-json",
 	"description": "同创图标json文件",
-	"version": "0.0.1",
+	"version": "0.0.4",
 	"main": "index.js",
 	"module": "index.mjs",
 	"types": "index.d.ts",
@@ -19,6 +19,9 @@
 		"metadata": "metadata.json"
 	},
 	"dependencies": {
-		"@iconify/types": "*"
+		"@iconify/types": "catalog:"
+	},
+	"volta": {
+		"extends": "../../package.json"
 	}
 }

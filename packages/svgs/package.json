@@ -1,9 +1,12 @@
 {
-	"name": "@hatech/icons-svg",
-	"description": "同创svg图标项目",
+	"name": "@one-public/icons-svg",
+	"description": "svg图标项目",
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
-		"@iconify/types": "*"
+		"@iconify/types": "catalog:"
+	},
+	"volta": {
+		"extends": "../../package.json"
 	}
 }

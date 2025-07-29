@@ -1,5 +1,5 @@
 {
-  "name": "hatech-icons",
+  "name": "icons",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -10,8 +10,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.62.0",
-    "@types/node": "^18.15.11",
-    "vite": "^4.2.1"
+    "@sxzz/eslint-config": "catalog:",
+    "@sxzz/prettier-config": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "prettier": "@sxzz/prettier-config",
+  "volta": {
+    "node": "20.18.0"
   }
 }

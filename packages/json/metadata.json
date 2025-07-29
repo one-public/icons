@@ -1,0 +1,14 @@
+{
+	"categories": {
+		"common": [
+			"check-square"
+		],
+		"menu": [
+			"arrow-2-colored",
+			"arrow-3-colored",
+			"arrow-4-colored",
+			"arrow-6-colored",
+			"arrow-right-circle"
+		]
+	}
+}

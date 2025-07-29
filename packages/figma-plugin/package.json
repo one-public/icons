@@ -3,24 +3,29 @@
   "version": "0.0.0",
   "description": "",
   "private": true,
+  "type":"module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch --mode dev",
+    "devcode": "vite build --watch --mode dev --config vite.config.code.ts",
     "build": "vite build",
-    "watch": "vite build --watch",
-    "serve": "vite preview"
+    "buildcode": "vite build --config vite.config.code.ts",
+    "preview": "vite preview",
+    "hmr": "vite",
+    "zip": "cross-env MODE=zip vite build"
   },
   "license": "MIT",
   "devDependencies": {
-    "@figma/plugin-typings": "^1.62.0",
-    "@unocss/preset-mini": "^0.51.2",
-    "@unocss/vite": "^0.51.2",
-    "axios": "^1.3.5",
-    "jsdom": "^21.1.1",
-    "typescript": "^5.0.3",
-    "vite": "^4.2.1",
-    "vite-plugin-solid": "^2.7.0"
+    "@unocss/preset-mini": "catalog:",
+    "@unocss/vite":"catalog:",
+    "vite-plugin-solid": "catalog:",
+    "@figma/plugin-typings": "catalog:",
+    "@types/node": "catalog:",
+    "cross-env": "catalog:",
+    "vite": "catalog:",
+    "vite-figma-plugin": "catalog:",
+    "vite-plugin-singlefile": "catalog:"
   },
   "dependencies": {
-    "solid-js": "^1.6.10"
+    "solid-js":  "catalog:"
   }
 }
