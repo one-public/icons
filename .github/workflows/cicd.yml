@@ -11,15 +11,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      # 下面是你的构建、测试等步骤
+
       - name: Run something
         run: echo "CICD for test-cicd branch!"
+
       - name: Get repo website
         uses: actions/github-script@v7
         with:
-        script: |
-          const repo = await github.rest.repos.get({
-            owner: context.repo.owner,
-            repo: context.repo.repo
-          });
-          console.log("Website:", repo.data);
+          script: |
+            const repo = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+            console.log("Website:", repo.data);
