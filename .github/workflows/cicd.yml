@@ -50,9 +50,8 @@ jobs:
           echo "component_version=${{ steps.releases-info.outputs.component_version }}"
 
       - name: feishu notification
-        uses: newGr8Player/feishu-message-action
+        uses: NewGr8Player/feishu-message-action@main
         with:
           webhook: ${{ secrets.FEISHU_WEBHOOK }}
-          type: interactive # 自定义卡片
-          # secret: ${{ secrets.FEISHU_SECRET }}
+          type: interactive
           message: '{"schema":"2.0","config":{"update_multi":true,"style":{"text_size":{"normal_v2":{"default":"normal","pc":"normal","mobile":"heading"}}}},"body":{"direction":"vertical","padding":"12px 12px 12px 12px","elements":[{"tag":"column_set","horizontal_spacing":"8px","horizontal_align":"left","columns":[{"tag":"column","width":"weighted","elements":[{"tag":"markdown","content":"<font color = \"grey\">组件名称</font>\n${{ steps.releases-info.outputs.component_name }}","text_align":"left","text_size":"normal_v2","margin":"0px 0px 0px 0px"}],"vertical_spacing":"8px","horizontal_align":"left","vertical_align":"top","weight":1},{"tag":"column","width":"weighted","elements":[{"tag":"markdown","content":"<font color = \"grey\">组件版本</font>\n${{ steps.releases-info.outputs.component_version }}","text_align":"left","text_size":"normal_v2","margin":"0px 0px 0px 0px"}],"vertical_spacing":"8px","horizontal_align":"left","vertical_align":"top","weight":1}],"margin":"0px 0px 0px 0px"},{"tag":"button","text":{"tag":"plain_text","content":"去看看"},"type":"primary_filled","width":"default","size":"medium","behaviors":[{"type":"template_open_url","multi_url":"${{ steps.repo-info.outputs.component_url }}"}],"margin":"0px 0px 0px 0px","element_id":"go_component_url"}]},"header":{"title":{"tag":"plain_text","content":"组件更新啦！！！"},"subtitle":{"tag":"plain_text","content":""},"template":"blue","icon":{"tag":"standard_icon","token":"speaker_filled"},"padding":"12px 12px 12px 12px"}}'
