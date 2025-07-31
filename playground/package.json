@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "serve": "vite preview"
   },
@@ -13,12 +14,13 @@
     "@iconify-json/carbon": "catalog:",
     "@unocss/reset": "catalog:",
     "@unocss/vite": "catalog:",
+    "unocss-preset-scrollbar": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-solid":"catalog:"
   },
   "dependencies": {
-    "@one-public/icon-json": "workspace:*",
+    "@one-public/icons": "workspace:*",
     "@iconify-icon/solid": "catalog:",
     "solid-js": "catalog:",
     "unocss": "catalog:"

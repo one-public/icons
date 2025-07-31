@@ -1,5 +1,4 @@
 import { createSignal, createRoot } from "solid-js";
-import { IconProps } from "./types";
 
 function createSearchValue() {
   const [value, setValue] = createSignal("");
@@ -8,8 +7,9 @@ function createSearchValue() {
 
 export const searchValue = createRoot(createSearchValue);
 
-function createSelectIcon() {
-  const [value, setValue] = createSignal<IconProps>();
-  return { value, setValue };
+
+function createIconSize() {
+  const [size, setSize] = createSignal(12); // 默认12px
+  return { size, setSize };
 }
-export const selectIcon = createRoot(createSelectIcon);
+export const iconSize = createRoot(createIconSize);

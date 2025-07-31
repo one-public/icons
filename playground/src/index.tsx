@@ -1,6 +1,7 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css'
 import './main.css'
+import "@one-public/icons/index.css";
 import { render } from 'solid-js/web';
 
 import App from './App';

@@ -1,44 +1,43 @@
-import type { Component } from "solid-js";
-import { createMemo, For } from "solid-js";
-import { addCollection } from "@iconify-icon/solid";
-import { icons } from "@one-public/icon-json";
-import Icons from "./Icons";
-import { searchValue } from "../currentValue";
-
-addCollection(icons);
+import type { Component } from 'solid-js'
+import CategorySidebar from './CategorySidebar'
+import IconGrid from './IconGrid'
+import { searchValue, iconSize } from '../currentValue'
+import { useIconData } from '../hooks'
 
 const IconList: Component = () => {
-  const { value } = searchValue;
-  const iconList = createMemo(() => {
-    const { prefix } = icons;
-    return Object.keys(icons.icons)
-      .filter((key) => key.includes(value()))
-      .map((key) => {
-        return {
-          svg: icons.icons[key].body,
-          name: key,
-          iconName: `${prefix}:${key}`,
-          prefix,
-          isColor: key.endsWith("colored"),
-        };
-      });
-  });
+  const { value } = searchValue
+  const { size } = iconSize
+
+  // 使用自定义 Hook 获取图标数据
+  const {
+    categories,
+    iconList,
+    groupedIcons,
+    getCategoryCount,
+    getCategoryDisplayName,
+  } = useIconData(value)
 
   return (
-    <div class="non-dragging flex flex-wrap select-none justify-center text-2xl text-dark-600 dark:text-dark-900 2xl">
-      <For each={iconList()}>
-        {(icon, i) => (
-          <Icons
-            prefix={icon.prefix}
-            iconName={icon.iconName}
-            name={icon.name}
-            svg={icon.svg}
-            isColor={icon.isColor}
-          ></Icons>
-        )}
-      </For>
-    </div>
-  );
-};
+    <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex-1">
+      {/* 侧边栏组件 */}
+      <CategorySidebar
+        categories={categories()}
+        getCategoryCount={getCategoryCount}
+        getCategoryDisplayName={getCategoryDisplayName}
+      />
 
-export default IconList;
+      {/* 主内容区域 */}
+      <div class="px-3 py-3 lg:px-6 lg:py-4 pt-4 lg:ml-60">
+        <IconGrid
+          iconList={iconList()}
+          groupedIcons={groupedIcons()}
+          searchValue={value()}
+          size={size()}
+          getCategoryDisplayName={getCategoryDisplayName}
+        />
+      </div>
+    </div>
+  )
+}
+
+export default IconList
