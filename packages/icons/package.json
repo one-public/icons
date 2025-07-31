@@ -1,13 +1,14 @@
 {
-	"name": "@one-public/icon-json",
-	"description": "同创图标json文件",
-	"version": "0.0.4",
+	"name": "@one-public/icons",
+	"description": "图标项目",
+	"version": "0.0.3",
 	"main": "index.js",
 	"module": "index.mjs",
 	"types": "index.d.ts",
 	"exports": {
 		"./*": "./*",
 		".": {
+			"types": "./index.d.ts",
 			"require": "./index.js",
 			"import": "./index.mjs"
 		},
@@ -19,9 +20,6 @@
 		"metadata": "metadata.json"
 	},
 	"dependencies": {
-		"@iconify/types": "catalog:"
-	},
-	"volta": {
-		"extends": "../../package.json"
+		"@iconify/types": "*"
 	}
 }

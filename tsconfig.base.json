@@ -10,6 +10,7 @@
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "typeRoots": [
       "./node_modules/@figma"

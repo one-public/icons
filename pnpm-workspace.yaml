@@ -27,4 +27,7 @@ catalog:
     "solid-js": ^1.9.7
     "@iconify-json/carbon": ^1.2.11
     "@iconify-icon/solid": ^3.0.0
+    "@iconify/utils": ^2.3.0
+    "pinyin-pro": ^3.26.0
+    "unocss-preset-scrollbar": "^3.2.0"
 

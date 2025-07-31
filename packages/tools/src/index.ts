@@ -1,50 +1,79 @@
-
-import { parseColors, cleanupSVG, runSVGO } from '@iconify/tools';
+import { parseColors, cleanupSVG, runSVGO } from '@iconify/tools'
+import { encodeSvgForCss } from '@iconify/utils'
 import autoPackage from './autoPackage'
-import figma from './figma';
-import createSvgs from './createSvgs';
-
-(async () => {
-
-  process.env.FIGMA_FILE_LINK = 'https://www.figma.com/file/j1ppBkV96gPsfEGglJ4J7C/icons?t=BvUPG9xac1vAIeFP-6'
-  process.env.FIGMA_TOKEN = 'figd_14Pn3f-bu_XuYhUTU_tNMOKQHX0WSgFxWAJYYoy7';
-  
-  const { result, iconTags } = await figma()
+import figma from './figma'
+import { iconPrefix } from './config'
+;(async () => {
+  const { result, iconTags, iconAlias } = await figma()
   if (result === 'not_modified') {
-    // This result is possible if ifModifiedSince option is set
-    console.log('figma图标 没有修改');
-    return;
+    console.log('figma图标 没有修改')
+    return
   }
-
-  const iconSet = result.iconSet;
-  // Check colors in icons
+  let css = `
+  /** 此文件是自动生成 */
+  `
+  const iconSet = result.iconSet
   await iconSet.forEach(async (name) => {
-    const svg = iconSet.toSVG(name);
+    const svg = iconSet.toSVG(name)
     if (!svg) {
-      return;
+      return
     }
-    // Clean up icon code
-    await cleanupSVG(svg);
+    cleanupSVG(svg)
 
-    await parseColors(svg, {
+    parseColors(svg, {
       // Change default color to 'currentColor'
       defaultColor: 'currentColor',
       // Callback to parse each color
       callback: (attr, colorStr) => {
         // 如果名称是 colored 结尾，就表示不修改图标颜色
-        if (name.endsWith('colored')) return colorStr;
+        if (iconTags[name] === 'colored') return colorStr
         const color = colorStr.toLowerCase()
-        if (color === 'none') return colorStr;
-        return 'currentColor';
+        if (color === 'none') return colorStr
+        return 'currentColor'
       },
-    });
-    runSVGO(svg);
-    // 设置分类 
-    iconSet.toggleCategory(name, iconTags[name], true);
-    // Update icon in icon set
-    iconSet.fromSVG(name, svg);
-  });
+    })
+    runSVGO(svg)
+    iconSet.toggleCategory(name, iconTags[name], true)
+    iconSet.fromSVG(name, svg)
 
-  await autoPackage(iconSet)
-  await createSvgs(iconSet)
-})();
+    const dataUri = `data:image/svg+xml;utf8,${encodeSvgForCss(svg.toString())}`
+    const cssVar = `--icon: url("${dataUri}");`
+    const cssName = `${iconPrefix}-${name}`
+    let cssContent = `
+  .${cssName} {
+    ${cssVar}
+    mask: var(--icon) no-repeat;
+    mask-size: 100% 100%;
+    -webkit-mask: var(--icon) no-repeat;
+    -webkit-mask-size: 100% 100%;
+    background-color: currentColor;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    font-size: 1em;
+  }
+`
+    if (iconTags[name] === 'colored') {
+      cssContent = `
+      .${cssName} {
+        ${cssVar}
+        background: var(--icon) no-repeat;
+        background-size: 100% 100%;
+        background-color: transparent;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        font-size: 1em;
+      }
+    `
+    }
+    css += cssContent
+  })
+
+  await autoPackage(iconSet, {
+    customFiles: {
+      'index.css': css,
+      'iconAlias.json': JSON.stringify(iconAlias, null, 2),
+    },
+  })
+})()

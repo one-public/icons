@@ -4,6 +4,7 @@
   "description": "用来获取设计工具中的图标,生成svg,并且发布到npm",
   "main": "index.js",
   "private": true,
+  "type": "module",
   "scripts": {
     "generate": "esno src/index.ts"
   },
@@ -11,14 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@iconify/tools": "catalog:"
+    "@iconify/tools": "catalog:",
+    "@iconify/utils": "catalog:",
+    "pinyin-pro": "catalog:"
   },
   "devDependencies": {
     "@iconify/types": "catalog:",
     "esno": "catalog:",
     "typescript": "catalog:"
   },
-	"volta": {
-		"extends": "../../package.json"
-	}
+  "volta": {
+    "extends": "../../package.json"
+  }
 }
