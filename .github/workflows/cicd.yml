@@ -21,7 +21,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            core.setOutput('component_name', repo.data.homepage || '');
+            core.setOutput('component_url', repo.data.homepage || '');
 
       - name: Get releases info
         id: releases-info
@@ -36,15 +36,17 @@ jobs:
               const latest = releases.data[0];
               const regex = /@([\w-]+\/[\w-]+)/;
               const match = latest.body.match(regex);
+              core.setOutput('component_name', match[0] || '');
               core.setOutput('component_version', latest.tag_name);
             } else {
+              core.setOutput('component_name', '');
               core.setOutput('component_version', '');
             }
 
       - name: Use component info
         run: |
           echo "component_url=${{ steps.repo-info.outputs.component_url }}"
-          echo "component_name=${{ steps.repo-info.outputs.component_name }}"
+          echo "component_name=${{ steps.releases-info.outputs.component_name }}"
           echo "component_version=${{ steps.releases-info.outputs.component_version }}"
 
       - name: feishu notification
@@ -52,4 +54,4 @@ jobs:
         with:
           webhook: ${{ secrets.FEISHU_WEBHOOK }}
           type: interactive
-          message: '{"schema":"2.0","config":{"update_multi":true,"style":{"text_size":{"normal_v2":{"default":"normal","pc":"normal","mobile":"heading"}}}},"body":{"direction":"vertical","padding":"12px 12px 12px 12px","elements":[{"tag":"column_set","horizontal_spacing":"8px","horizontal_align":"left","columns":[{"tag":"column","width":"weighted","elements":[{"tag":"markdown","content":"<font color = \"grey\">组件名称</font>\n${{ steps.repo-info.outputs.component_name }}","text_align":"left","text_size":"normal_v2","margin":"0px 0px 0px 0px"}],"vertical_spacing":"8px","horizontal_align":"left","vertical_align":"top","weight":1},{"tag":"column","width":"weighted","elements":[{"tag":"markdown","content":"<font color = \"grey\">组件版本</font>\n${{ steps.releases-info.outputs.component_version }}","text_align":"left","text_size":"normal_v2","margin":"0px 0px 0px 0px"}],"vertical_spacing":"8px","horizontal_align":"left","vertical_align":"top","weight":1}],"margin":"0px 0px 0px 0px"},{"tag":"button","text":{"tag":"plain_text","content":"去看看"},"type":"primary_filled","width":"default","size":"medium","behaviors":[{"type":"template_open_url","multi_url":"${{ steps.repo-info.outputs.component_url }}"}],"margin":"0px 0px 0px 0px","element_id":"go_component_url"}]},"header":{"title":{"tag":"plain_text","content":"组件更新啦！！！"},"subtitle":{"tag":"plain_text","content":""},"template":"blue","icon":{"tag":"standard_icon","token":"speaker_filled"},"padding":"12px 12px 12px 12px"}}'
+          message: '{"schema":"2.0","config":{"update_multi":true,"style":{"text_size":{"normal_v2":{"default":"normal","pc":"normal","mobile":"heading"}}}},"body":{"direction":"vertical","padding":"12px 12px 12px 12px","elements":[{"tag":"column_set","horizontal_spacing":"8px","horizontal_align":"left","columns":[{"tag":"column","width":"weighted","elements":[{"tag":"markdown","content":"<font color = \"grey\">组件名称</font>\n${{ steps.releases-info.outputs.component_name }}","text_align":"left","text_size":"normal_v2","margin":"0px 0px 0px 0px"}],"vertical_spacing":"8px","horizontal_align":"left","vertical_align":"top","weight":1},{"tag":"column","width":"weighted","elements":[{"tag":"markdown","content":"<font color = \"grey\">组件版本</font>\n${{ steps.releases-info.outputs.component_version }}","text_align":"left","text_size":"normal_v2","margin":"0px 0px 0px 0px"}],"vertical_spacing":"8px","horizontal_align":"left","vertical_align":"top","weight":1}],"margin":"0px 0px 0px 0px"},{"tag":"button","text":{"tag":"plain_text","content":"去看看"},"type":"primary_filled","width":"default","size":"medium","behaviors":[{"type":"template_open_url","default_url":"${{ steps.repo-info.outputs.component_url }}"}],"margin":"0px 0px 0px 0px","element_id":"go_component_url"}]},"header":{"title":{"tag":"plain_text","content":"组件更新啦！！！"},"subtitle":{"tag":"plain_text","content":""},"template":"blue","icon":{"tag":"standard_icon","token":"speaker_filled"},"padding":"12px 12px 12px 12px"}}'
