@@ -12,10 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run something
-        run: echo "CICD for test-cicd branch!"
-
       - name: Get repo website
+        id: repo-info
         uses: actions/github-script@v7
         with:
           script: |
@@ -23,8 +21,10 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            console.log("Website:", repo.data);
+            core.setOutput('component_url', repo.data.homepage || '');
+
       - name: Get releases info
+        id: releases-info
         uses: actions/github-script@v7
         with:
           script: |
@@ -32,4 +32,19 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             });
-            console.log("releases:", releases.data[0]);
+            if (releases.data.length > 0) {
+              const latest = releases.data[0];
+              const regex = /@([\w-]+\/[\w-]+)/;
+              const match = latest.body.match(regex);
+              core.setOutput('component_name', match ? match[0] : '');
+              core.setOutput('component_version', latest.tag_name);
+            } else {
+              core.setOutput('component_name', '');
+              core.setOutput('component_version', '');
+            }
+
+      - name: Use component info
+        run: |
+          echo "component_url=${{ steps.repo-info.outputs.component_url }}"
+          echo "component_name=${{ steps.releases-info.outputs.component_name }}"
+          echo "component_version=${{ steps.releases-info.outputs.component_version }}"
