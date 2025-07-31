@@ -1,10 +1,14 @@
 name: 预览
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [master]
   repository_dispatch:
     types: [deploy_request] # 接收外部 HTTP 请求触发
+
+env: # 全局变量
+  component_name: "@one-public/icons"
 
 jobs:
   build:
@@ -13,37 +17,55 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install node
-        uses: actions/setup-node@v3
-        with:
-          node-version: latest
-          registry-url: 'https://registry.npmjs.org'
+      # - name: Install node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: latest
+      #     registry-url: 'https://registry.npmjs.org'
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: latest
-          run_install: false
+      # - name: Install pnpm
+      #   uses: pnpm/action-setup@v2
+      #   with:
+      #     version: latest
+      #     run_install: false
         
-      - run: >
-          echo -e 环境准备完成~ \n\t
-          pnpm: "$(pnpm -v)" \n\t
-          node: "$(node -v)" \n\t
-          npm:  "$(npm -v)" \n\t
+      # - run: >
+      #     echo -e 环境准备完成~ \n\t
+      #     pnpm: "$(pnpm -v)" \n\t
+      #     node: "$(node -v)" \n\t
+      #     npm:  "$(npm -v)" \n\t
 
-      - name: Install
-        run: pnpm i
+      # - name: Install
+      #   run: pnpm i
 
-      - name: Generate
-        run: pnpm generate
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          FIGMA_FILE_LINK: ${{ secrets.FIGMA_FILE_LINK }}
-          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
-
-      # - name: Publish
-      #   run: pnpm -r publish --access public --report-summary --no-git-checks
+      # - name: Generate
+      #   run: pnpm generate
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      #     FIGMA_FILE_LINK: ${{ secrets.FIGMA_FILE_LINK }}
+      #     FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+      - name: Get repo website
+        uses: actions/github-script@v7
+        with:
+        script: |
+          const repo = await github.rest.repos.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo
+          });
+          console.log("Website:", repo.data);
+
+      # - name: Get npm package version
+      #   id: npmver
+      #   run: |
+      #     npm_version=$(npm view ${{ component_name }} version)
+      #     echo "npm_version=$npm_version" >> $GITHUB_OUTPUT
+
+      # - name: feishu notification
+      #   uses: NewGr8Player/feishu-message-action
+      #   with:
+      #     webhook: ${{ secrets.FEISHU_WEBHOOK }}
+      #     type: interactive # 自定义卡片
+      #     secret: ${{ secrets.FEISHU_SECRET }}
+      #     message:
 
       - run: echo 运行完成~
