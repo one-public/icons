@@ -1,6 +1,10 @@
 name: 预览
 
-on: pull_request
+on:
+  pull_request:
+    branches: [master]
+  repository_dispatch:
+    types: [deploy_request] # 接收外部 HTTP 请求触发
 
 jobs:
   build:
@@ -41,9 +45,5 @@ jobs:
       #   run: pnpm -r publish --access public --report-summary --no-git-checks
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
-      - run: echo 运行完成~    
-      
 
-
-
+      - run: echo 运行完成~
