@@ -50,7 +50,7 @@ jobs:
           echo "component_version=${{ steps.releases-info.outputs.component_version }}"
 
       - name: feishu notification
-        uses: NewGr8Player/feishu-message-action
+        uses: newGr8Player/feishu-message-action
         with:
           webhook: ${{ secrets.FEISHU_WEBHOOK }}
           type: interactive # 自定义卡片
