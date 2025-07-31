@@ -34,7 +34,7 @@ jobs:
         run: pnpm generate
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          FIGMA_FILE_URL: ${{ secrets.FIGMA_FILE_URL }}
+          FIGMA_FILE_LINK: ${{ secrets.FIGMA_FILE_LINK }}
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
 
       # - name: Publish
