@@ -1,0 +1,16 @@
+name: cicd
+
+on:
+  push:
+    branches:
+      - test-cicd
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # 下面是你的构建、测试等步骤
+      - name: Run something
+        run: echo "CICD for test-cicd branch!"
