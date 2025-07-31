@@ -63,7 +63,7 @@ export default async function (
 
   console.log(`${name} 准备推送到npm仓库`);
 
-  await execAsync('npm publish --access=public --silent', {
+  await execAsync('npm publish --access=public --report-summary', {
     cwd: target,
   });
 
