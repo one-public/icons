@@ -1,6 +1,7 @@
 name: 预览
 
-on: pull_request
+on:
+  workflow_dispatch: # 允许手动触发
 
 jobs:
   build:
